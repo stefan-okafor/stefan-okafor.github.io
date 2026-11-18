@@ -4,20 +4,21 @@ document.documentElement.classList.add('js');
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-// Theme preference: local browser storage, with system preference fallback.
+// Light is the default. Save an explicit theme choice per visitor.
 const themeButton = $('#theme-toggle');
-const storedTheme = (() => { try { return localStorage.getItem('io-theme'); } catch { return null; } })();
-const startingTheme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'dark';
+const storedTheme = (() => { try { return localStorage.getItem('io-theme-v2'); } catch { return null; } })();
+const startingTheme = storedTheme === 'dark' ? 'dark' : 'light';
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   themeButton?.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  themeButton?.setAttribute('title', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#080b11' : '#f8fafb');
 }
 setTheme(startingTheme);
 themeButton?.addEventListener('click', () => {
   const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
   setTheme(next);
-  try { localStorage.setItem('io-theme', next); } catch {}
+  try { localStorage.setItem('io-theme-v2', next); } catch {}
 });
 
 // Mobile navigation.
@@ -37,7 +38,7 @@ menuToggle?.addEventListener('click', () => {
 $$('.nav-links a').forEach(link => link.addEventListener('click', closeMenu));
 window.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
 
-// Interactive conceptual network demo — not production telemetry.
+// Interactive conceptual network demo, not production telemetry.
 const nodeInfo = {
   gateway: { title: 'Gateway / routing', description: 'Routes traffic between network segments and connected systems.' },
   switch: { title: 'Access switch / VLANs', description: 'Connects endpoints using configured access and trunk interfaces.' },
