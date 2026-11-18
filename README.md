@@ -8,7 +8,7 @@ A fast, responsive, accessible personal portfolio built with plain HTML, CSS, an
 - `styles.css` — full responsive design with dark/light modes
 - `script.js` — navigation, live demo interactions, project filters, theme preferences, and email copying
 - `assets/favicon.svg` — custom brand icon
-- `assets/Ifeanyi_Stefan_Okafor_Resume.pdf` — résumé download
+- \`assets/Ifeanyi_Stefan_Okafor_Resume_2026-11-18.pdf\` — resume download
 - `.nojekyll` — GitHub Pages compatibility
 
 
