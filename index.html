@@ -10,8 +10,18 @@
   <meta property="og:description" content="Keeping networks connected, systems reliable, and technology human. Explore my IT experience, projects, and skills.">
   <title>Ifeanyi Okafor — IT & Network Systems Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <script>
+    // Clear theme settings from the unintended redesign once.
+    try {
+      if (localStorage.getItem('io-original-theme-restored') !== '1') {
+        localStorage.removeItem('io-theme');
+        localStorage.removeItem('io-theme-v2');
+        localStorage.setItem('io-original-theme-restored', '1');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="styles.css?original=25d85042">
+  <script src="script.js?original=25d85042" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
