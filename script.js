@@ -4,10 +4,10 @@ document.documentElement.classList.add('js');
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-// Theme preference: local browser storage, with system preference fallback.
+// Light theme is the default; a visitor may save their explicit choice.
 const themeButton = $('#theme-toggle');
-const storedTheme = (() => { try { return localStorage.getItem('io-theme'); } catch { return null; } })();
-const startingTheme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'dark';
+const storedTheme = (() => { try { return localStorage.getItem('io-theme-v3'); } catch { return null; } })();
+const startingTheme = storedTheme === 'dark' ? 'dark' : 'light';
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   themeButton?.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
@@ -17,7 +17,7 @@ setTheme(startingTheme);
 themeButton?.addEventListener('click', () => {
   const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
   setTheme(next);
-  try { localStorage.setItem('io-theme', next); } catch {}
+  try { localStorage.setItem('io-theme-v3', next); } catch {}
 });
 
 // Mobile navigation.
